@@ -1,5 +1,6 @@
 [package]
 name = "{{project-name}}"
+# name = "atmega-hal-template"
 version = "0.1.0"
 authors = ["{{authors}}"]
 edition = "2021"
@@ -7,6 +8,7 @@ license = "MIT OR Apache-2.0"
 
 [[bin]]
 name = "{{project-name}}"
+# name = "atmega-hal-template"
 test = false
 bench = false
 
@@ -16,35 +18,14 @@ ufmt = "0.2.0"
 nb = "1.1.0"
 embedded-hal = "1.0"
 
-[dependencies.arduino-hal]
+[dependencies.embedded-hal-v0]
+version = "0.2.3"
+package = "embedded-hal"
+
+[dependencies.atmega-hal]
 git = "https://github.com/rahix/avr-hal"
 rev = "3e362624547462928a219c40f9ea8e3a64f21e5f"
-{% case board -%}
-  {%- when "Adafruit Trinket" -%}
-    features = ["trinket"]
-  {%- when "Adafruit Trinket Pro" -%}
-    features = ["trinket-pro"]
-  {%- when "Arduino Leonardo" -%}
-    features = ["arduino-leonardo"]
-  {%- when "Arduino Mega 2560" -%}
-    features = ["arduino-mega2560"]
-  {%- when "Arduino Mega 1280" -%}
-    features = ["arduino-mega1280"]
-  {%- when "Arduino Nano" -%}
-    features = ["arduino-nano"]
-  {%- when "Arduino Nano New Bootloader" -%}
-    features = ["arduino-nano"]
-  {%- when "Arduino Uno" -%}
-    features = ["arduino-uno"]
-  {%- when "SparkFun ProMicro" -%}
-    features = ["sparkfun-promicro"]
-  {%- when "SparkFun ProMini 3v3" -%}
-    features = ["sparkfun-promini-3v3"]
-  {%- when "SparkFun ProMini 5v" -%}
-    features = ["sparkfun-promini-5v"]
-  {%- when "Nano168" -%}
-    features = ["nano168"]
-{%- endcase %}
+features = ["rt", "atmega328p"]
 
 # The latest releases of `proc-macro2` do not support the rust toolchain that
 # we use.  Thus, we must fix this dependency to an older version where our
@@ -64,6 +45,3 @@ codegen-units = 1
 debug = true
 lto = true
 opt-level = "s"
-{%- comment %}
-# vim: ft=toml.jinja2
-{% endcomment %}

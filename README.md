@@ -1,40 +1,19 @@
-`avr-hal-template`
-==================
-[`cargo-generate`] template for jumpstarting projects on common AVR
-microcontroller boards.  This template supports the following hardware at this
-time:
+# atmega-hal-template
 
- - Arduino Leonardo
- - Arduino Mega 2560
- - Arduino Mega 1280
- - Arduino Nano
- - Arduino Nano New Bootloader (Manufactured after January 2018)
- - Arduino Uno
- - SparkFun ProMicro
- - SpartFun ProMini 3.3V
- - SpartFun ProMini 5v
- - Adafruit Trinket
- - Adafruit Trinket Pro
+[`cargo-generate`] template for jumpstarting projects on common AVR
+microcontroller.
 
 ## Usage
-If you don't have them already, install [`cargo-generate`] and [`ravedude`]:
+If you don't have them already, install [`cargo-generate`]:
 
 ```bash
 cargo install cargo-generate
-cargo install ravedude
 ```
 
 Then instantiate this template:
 
 ```bash
-cargo generate --git https://github.com/Rahix/avr-hal-template.git
-```
-
-You will be prompted to select your board - do so and you're ready to roll!
-Everything is prepared so you should be able to just
-
-```bash
-cargo run
+cargo generate --git https://github.com/BerandaMegane/atmega-hal-template.git
 ```
 
 and see a blinky flashed to your board!

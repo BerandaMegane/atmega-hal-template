@@ -1,48 +1,33 @@
 #![no_std]
 #![no_main]
 
+use embedded_hal::delay::DelayNs;
 use panic_halt as _;
 
-#[arduino_hal::entry]
+// Define core clock. This can be used in the rest of the project.
+type CoreClock = atmega_hal::clock::MHz1;
+type Delay = atmega_hal::delay::Delay<crate::CoreClock>;
+
+// Below are examples of a delay helper functions
+fn delay_ms(ms: u16) {
+    Delay::new().delay_ms(u32::from(ms))
+}
+
+#[allow(dead_code)]
+fn delay_us(us: u32) {
+    Delay::new().delay_us(us)
+}
+
+#[atmega_hal::entry]
 fn main() -> ! {
-    let dp = arduino_hal::Peripherals::take().unwrap();
-    let pins = arduino_hal::pins!(dp);
+    let dp = atmega_hal::Peripherals::take().unwrap();
+    let pins = atmega_hal::pins!(dp);
 
-    /*
-     * For examples (and inspiration), head to
-     *
-     *     https://github.com/Rahix/avr-hal/tree/main/examples
-     *
-     * NOTE: Not all examples were ported to all boards!  There is a good chance though, that code
-     * for a different board can be adapted for yours.  The Arduino Uno currently has the most
-     * examples available.
-     */
-
-    {% case board -%}
-      {%- when "Adafruit Trinket" -%}
-    let mut led = pins.d1.into_output();
-      {%- when
-        "Arduino Leonardo",
-        "Arduino Mega 2560",
-        "Arduino Mega 1280",
-        "Arduino Nano",
-        "Arduino Nano New Bootloader",
-        "Arduino Uno",
-        "Nano168",
-        "Adafruit Trinket Pro",
-        "SparkFun ProMini 3v3",
-        "SparkFun ProMini 5v"
-      -%}
-    let mut led = pins.d13.into_output();
-      {%- when "SparkFun ProMicro" -%}
-    let mut led = pins.led_rx.into_output();
-    {%- endcase %}
+    // PORTB PB5 -> output
+    let mut led = pins.pb5.into_output();
 
     loop {
         led.toggle();
-        arduino_hal::delay_ms(1000);
+        delay_ms(500);
     }
 }
-{%- comment %}
-# vim: ft=rust.jinja2
-{% endcomment %}
