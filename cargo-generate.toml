@@ -1,22 +1,3 @@
-[placeholders.board]
-type = "string"
-prompt = "Which board do you use?"
-choices = [
-  "Adafruit Trinket",
-  "Adafruit Trinket Pro",
-  "Arduino Leonardo",
-  "Arduino Mega 2560",
-  "Arduino Mega 1280",
-  "Arduino Nano",
-  "Arduino Nano New Bootloader",
-  "Arduino Uno",
-  "SparkFun ProMicro",
-  "SparkFun ProMini 3v3",
-  "SparkFun ProMini 5v",
-  "Nano168",
-]
-default = "Arduino Uno"
-
 [template]
 ignore=["README.md"]
 
